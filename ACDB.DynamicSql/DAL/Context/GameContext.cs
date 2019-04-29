@@ -6,7 +6,6 @@ namespace ACDB.DynamicSql.DAL.Context
 {
     public class GameContext : DbContext
     {
-
         public GameContext(DbContextOptions<GameContext> options)
             : base(options)
         {

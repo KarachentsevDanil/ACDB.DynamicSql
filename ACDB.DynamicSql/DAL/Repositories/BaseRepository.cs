@@ -17,27 +17,32 @@ namespace ACDB.DynamicSql.DAL.Repositories
 
         protected TContext DbContext { get; }
 
-        public void Create(TEntity entity)
+        public virtual void Create(TEntity entity)
         {
             DbContext.Set<TEntity>().Add(entity);
         }
 
-        public void Delete(TEntity entity)
+        public virtual void Delete(TEntity entity)
         {
             DbContext.Set<TEntity>().Remove(entity);
         }
 
-        public async Task<TEntity> GetAsync(TId id, CancellationToken ct = default)
+        public virtual async Task SaveChangesAsync(CancellationToken ct = default)
         {
-            return await DbContext.Set<TEntity>().FindAsync(id, ct);
+            await DbContext.SaveChangesAsync(ct);
         }
 
-        public async Task<IEnumerable<TEntity>> GetListAsync(CancellationToken ct = default)
+        public virtual async Task<TEntity> GetAsync(TId id, CancellationToken ct = default)
+        {
+            return await DbContext.Set<TEntity>().FindAsync(id);
+        }
+
+        public virtual async Task<IEnumerable<TEntity>> GetListAsync(CancellationToken ct = default)
         {
             return await DbContext.Set<TEntity>().ToListAsync(ct);
         }
 
-        public void Update(TEntity entity)
+        public virtual void Update(TEntity entity)
         {
             DbContext.Set<TEntity>().Update(entity);
         }

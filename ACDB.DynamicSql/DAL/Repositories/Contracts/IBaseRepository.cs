@@ -16,5 +16,7 @@ namespace ACDB.DynamicSql.DAL.Repositories.Contracts
         void Update(TEntity entity);
 
         void Delete(TEntity entity);
+
+        Task SaveChangesAsync(CancellationToken ct = default);
     }
 }

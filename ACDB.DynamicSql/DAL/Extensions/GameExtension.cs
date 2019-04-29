@@ -13,12 +13,14 @@ namespace ACDB.DynamicSql.DAL.Extensions
             modelBuilder.Entity<Game>()
                 .HasOne(g => g.Category)
                 .WithMany(g => g.Games)
-                .HasForeignKey(g => g.CategoryId);
+                .HasForeignKey(g => g.CategoryId)
+                .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<Game>()
                 .HasOne(g => g.Company)
                 .WithMany(g => g.Games)
-                .HasForeignKey(g => g.CompanyId);
+                .HasForeignKey(g => g.CompanyId)
+                .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<Game>()
                 .Property(g => g.CategoryId)
